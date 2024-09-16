@@ -52,9 +52,11 @@ class TaskManager:
 			return True
 		return False
 
-	def list_tasks(self, include_completed=False):
+	def list_tasks(self, include_completed=False, only_completed=False):
 		tasks = self.storage.get_all_tasks()
-		if not include_completed:
+		if only_completed:
+			tasks = [task for task in tasks if task.completed]
+		elif not include_completed:
 			tasks = [task for task in tasks if not task.completed]
 		return tasks
 

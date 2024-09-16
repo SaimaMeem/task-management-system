@@ -31,6 +31,7 @@ def main():
     # List tasks
     list_parser = subparsers.add_parser("list", help="List all pending tasks")
     list_parser.add_argument("--all", action="store_true", help="Include completed tasks")
+    list_parser.add_argument("--completed", action="store_true", help="Show only completed tasks")
 
     # Generate report
     subparsers.add_parser("report", help="Generate a report")
@@ -59,7 +60,7 @@ def main():
         else:
             print(f"Task '{args.title}' not found.")
     elif args.command == "list":
-        tasks = manager.list_tasks(include_completed=args.all)
+        tasks = manager.list_tasks(include_completed=args.all, only_completed=args.completed)
         if tasks:
             for task in tasks:
                 status = "Completed" if task.completed else "Pending"
