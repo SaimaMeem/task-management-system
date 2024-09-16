@@ -34,7 +34,10 @@ def main():
 
     if args.command == "add":
         task = manager.add_task(args.title, args.description)
-        print(f"Task '{task.title}' added successfully.")
+        if task:
+            print(f"Task '{task.title}' added successfully.")
+        else:
+            print(f"A task titled '{args.title}' already exists and is currently pending.")
     elif args.command == "complete":
         if manager.complete_task(args.title):
             print(f"Task '{args.title}' marked as completed.")

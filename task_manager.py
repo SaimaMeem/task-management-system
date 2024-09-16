@@ -16,9 +16,16 @@ class TaskManager:
 		self.storage = storage
 
 	def add_task(self, title, description):
-		task = Task(title, description)
-		self.storage.save_task(task)
-		return task
+		existing_task = self.storage.get_task(title)
+
+		# Proceed if the task doesn't exist or the existing task is completed
+		if not existing_task or existing_task.completed:
+			task = Task(title, description)
+			self.storage.save_task(task)
+			return task
+
+		return None
+
 
 	def complete_task(self, title):
 		task = self.storage.get_task(title)
