@@ -18,11 +18,11 @@ def main():
 
     # Complete task
     complete_parser = subparsers.add_parser("complete",
-                                            help="Mark a task as completed")
+                                            help="Mark a pending task as completed")
     complete_parser.add_argument("title", help="Task title")
 
     # List tasks
-    list_parser = subparsers.add_parser("list", help="List all tasks")
+    list_parser = subparsers.add_parser("list", help="List all pending tasks")
     list_parser.add_argument("--all",
                              action="store_true",
                              help="Include completed tasks")
