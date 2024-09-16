@@ -11,6 +11,25 @@ class Task:
 		self.created_at = created_at or datetime.now().isoformat()
 		self.completed_at = completed_at
 
+	def to_dict(self):
+		return {
+			'title': self.title,
+			'description': self.description,
+			'completed': self.completed,
+			'created_at': self.created_at,
+			'completed_at': self.completed_at
+		}
+
+	@classmethod
+	def from_dict(cls, data):
+		return cls(
+			title=data.get('title'),
+			description=data.get('description'),
+			completed=data.get('completed', False),
+			created_at=data.get('created_at'),
+			completed_at=data.get('completed_at')
+		)
+
 class TaskManager:
 
 	def __init__(self, storage):

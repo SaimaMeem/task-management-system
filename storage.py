@@ -13,7 +13,7 @@ class Storage:
 		try:
 			with open(self.filename, "r") as file:
 				data = json.load(file)
-				self.tasks = [Task(**task) for task in data]
+				self.tasks = [Task.from_dict(task) for task in data.get('tasks', [])]
 
 		except (FileNotFoundError, json.JSONDecodeError):
 			# Handle case when file does not exist or contains invalid JSON
@@ -21,7 +21,7 @@ class Storage:
 
 	def save_task_to_file(self):
 		with open(self.filename, "w") as file:
-			json.dump([task.__dict__ for task in self.tasks], file)
+			json.dump({"tasks": [task.to_dict() for task in self.tasks]}, file, indent=2)
 
 	def save_task(self, task):
 		self.tasks.append(task)
