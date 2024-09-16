@@ -8,28 +8,29 @@ def main():
     manager = TaskManager(storage)
 
     parser = argparse.ArgumentParser(description="Task Management System")
-    subparsers = parser.add_subparsers(dest="command",
-                                       help="Available commands")
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # Add task
     add_parser = subparsers.add_parser("add", help="Add a new task")
     add_parser.add_argument("title", help="Task title")
     add_parser.add_argument("description", help="Task description")
 
+    # Update task
+    update_parser = subparsers.add_parser("update", help="Update description of a pending task")
+    update_parser.add_argument("title", help="Task title")
+    update_parser.add_argument("description", help="Task description")
+
     # Complete task
-    complete_parser = subparsers.add_parser("complete",
-                                            help="Mark a pending task as completed")
+    complete_parser = subparsers.add_parser("complete", help="Mark a pending task as completed")
     complete_parser.add_argument("title", help="Task title")
+
+    # Delete task
+    delete_parser = subparsers.add_parser("delete", help="Delete a pending task")
+    delete_parser.add_argument("title", help="Task title")
 
     # List tasks
     list_parser = subparsers.add_parser("list", help="List all pending tasks")
-    list_parser.add_argument("--all",
-                             action="store_true",
-                             help="Include completed tasks")
-    # Delete task
-    delete_parser = subparsers.add_parser("delete",
-                                            help="Delete a pending task")
-    delete_parser.add_argument("title", help="Task title")
+    list_parser.add_argument("--all", action="store_true", help="Include completed tasks")
 
     # Generate report
     subparsers.add_parser("report", help="Generate a report")
@@ -42,6 +43,11 @@ def main():
             print(f"Task '{task.title}' added successfully.")
         else:
             print(f"A task titled '{args.title}' already exists and is currently pending.")
+    elif args.command == "update":
+        if manager.edit_task(args.title, args.description):
+            print(f"Task '{args.title}' updated successfully.")
+        else:
+            print(f"Task '{args.title}' not found.")
     elif args.command == "complete":
         if manager.complete_task(args.title):
             print(f"Task '{args.title}' marked as completed.")

@@ -26,6 +26,15 @@ class TaskManager:
 
 		return None
 
+	def edit_task(self, title, description):
+		task = self.storage.get_task(title)
+		if task:
+			task.description = description
+			self.storage.update_task(task)
+			return task
+
+		return None
+
 
 	def complete_task(self, title):
 		task = self.storage.get_task(title)
