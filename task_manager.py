@@ -43,7 +43,6 @@ class TaskManager:
 			task = Task(title, description)
 			self.storage.save_task(task)
 			return task
-
 		return None
 
 	def edit_task(self, title, description):
@@ -83,8 +82,8 @@ class TaskManager:
 		task = self.storage.get_task(title)
 		if task:
 			formatted_task_creation_time = datetime.fromisoformat(task.created_at).strftime('%B %d, %Y at %I:%M %p')
-			return [task, formatted_task_creation_time]
-		return []
+			return task, formatted_task_creation_time
+		return None
 
 	def generate_report(self):
 		tasks = self.storage.get_all_tasks()
