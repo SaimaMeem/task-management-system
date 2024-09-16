@@ -29,7 +29,7 @@ class Storage:
 
 	def update_task(self, updated_task):
 		for i, task in enumerate(self.tasks):
-			if task.title.lower() == updated_task.title.lower() and not task.completed:
+			if task.title.lower() == updated_task.title.lower():
 				self.tasks[i] = updated_task
 				self.save_task_to_file()
 				break
@@ -42,7 +42,7 @@ class Storage:
 
 	def remove_task(self, deleted_task):
 		for task in self.tasks:
-			if task.title.lower() == deleted_task.title.lower() and not task.completed:
+			if task.title.lower() == deleted_task.title.lower():
 				self.tasks.remove(task)
 				self.save_task_to_file()
 				break

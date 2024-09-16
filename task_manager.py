@@ -31,9 +31,8 @@ class TaskManager:
 		if task:
 			task.description = description
 			self.storage.update_task(task)
-			return task
-
-		return None
+			return True
+		return False
 
 
 	def complete_task(self, title):
