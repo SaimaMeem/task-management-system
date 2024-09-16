@@ -40,6 +40,13 @@ class Storage:
 				return task
 		return None
 
+	def remove_task(self, deleted_task):
+		for task in self.tasks:
+			if task.title.lower() == deleted_task.title.lower() and not task.completed:
+				self.tasks.remove(task)
+				self.save_task_to_file()
+				break
+
 	def get_all_tasks(self):
 		return list(self.tasks)
 

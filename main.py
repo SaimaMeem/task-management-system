@@ -26,6 +26,10 @@ def main():
     list_parser.add_argument("--all",
                              action="store_true",
                              help="Include completed tasks")
+    # Delete task
+    delete_parser = subparsers.add_parser("delete",
+                                            help="Delete a pending task")
+    delete_parser.add_argument("title", help="Task title")
 
     # Generate report
     subparsers.add_parser("report", help="Generate a report")
@@ -41,6 +45,11 @@ def main():
     elif args.command == "complete":
         if manager.complete_task(args.title):
             print(f"Task '{args.title}' marked as completed.")
+        else:
+            print(f"Task '{args.title}' not found.")
+    elif args.command == "delete":
+        if manager.delete_task(args.title):
+            print(f"Task '{args.title}' deleted successfully.")
         else:
             print(f"Task '{args.title}' not found.")
     elif args.command == "list":

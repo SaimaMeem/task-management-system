@@ -36,6 +36,13 @@ class TaskManager:
 			return True
 		return False
 
+	def delete_task(self, title):
+		task = self.storage.get_task(title)
+		if task:
+			self.storage.remove_task(task)
+			return True
+		return False
+
 	def list_tasks(self, include_completed=False):
 		tasks = self.storage.get_all_tasks()
 		if not include_completed:
