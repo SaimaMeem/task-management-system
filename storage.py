@@ -29,14 +29,14 @@ class Storage:
 
 	def update_task(self, updated_task):
 		for i, task in enumerate(self.tasks):
-			if task.title == updated_task.title:
+			if task.title.lower() == updated_task.title.lower() and not task.completed:
 				self.tasks[i] = updated_task
 				self.save_task_to_file()
 				break
 
 	def get_task(self, title):
 		for task in self.tasks:
-			if task.title == title and not task.completed:
+			if task.title.lower() == title.lower() and not task.completed:
 				return task
 		return None
 
