@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from re import search
 
 
 class Task:
@@ -58,6 +59,13 @@ class TaskManager:
 		elif not include_completed:
 			tasks = [task for task in tasks if not task.completed]
 		return tasks
+
+	def search_task(self, title):
+		task = self.storage.get_task(title)
+		if task:
+			formatted_task_creation_time = datetime.fromisoformat(task.created_at).strftime('%B %d, %Y at %I:%M %p')
+			return [task, formatted_task_creation_time]
+		return []
 
 	def generate_report(self):
 		tasks = self.storage.get_all_tasks()

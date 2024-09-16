@@ -33,6 +33,10 @@ def main():
     list_parser.add_argument("--all", action="store_true", help="Include completed tasks")
     list_parser.add_argument("--completed", action="store_true", help="Show only completed tasks")
 
+    # Search task and show details
+    search_parser = subparsers.add_parser("search", help="Search a pending task and show details")
+    search_parser.add_argument("title", help="Task title")
+
     # Generate report
     subparsers.add_parser("report", help="Generate a report")
 
@@ -68,6 +72,13 @@ def main():
                 print(f"{task.title} - {status}")
         else:
             print("No tasks found.")
+    elif args.command == "search":
+        result = manager.search_task(args.title)
+        if result:
+            task, formatted_task_creation_time = result
+            print(f"""Title: {task.title} \nDescription: {task.description} \nCreated At: {formatted_task_creation_time}""")
+        else:
+            print(f"Task '{args.title}' not found.")
     elif args.command == "report":
         print(manager.generate_report())
     else:
