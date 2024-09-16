@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "title": "Buy groceries",
+      "description": "Milk, eggs, butter, and bread",
+      "completed": false,
+      "created_at": "2024-09-17T03:26:02.070980",
+      "completed_at": null
+    },
+    {
+      "title": "Morning workout",
+      "description": "30-minute cardio session",
+      "completed": false,
+      "created_at": "2024-09-17T03:26:51.048683",
+      "completed_at": null
+    },
+    {
+      "title": "Pay Internet Bill",
+      "description": "fdfdsfsdf",
+      "completed": false,
+      "created_at": "2024-09-17T03:31:47.681033",
+      "completed_at": null
+    }
+  ]
+}
