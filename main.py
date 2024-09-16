@@ -61,8 +61,9 @@ def main():
             print(f"Task '{args.title}' not found.")
     elif args.command == "list":
         tasks = manager.list_tasks(include_completed=args.all, only_completed=args.completed)
+        sorted_tasks = sorted(tasks, key=lambda t: t.created_at, reverse=True)
         if tasks:
-            for task in tasks:
+            for task in sorted_tasks:
                 status = "Completed" if task.completed else "Pending"
                 print(f"{task.title} - {status}")
         else:
