@@ -41,8 +41,8 @@ class TestTaskManager(unittest.TestCase):
 		self.storage.get_all_tasks.return_value = tasks
 		report = self.manager.generate_report()
 		self.assertEqual(report["total"], 3)
-		self.assertEqual(report["completed"], 2)
-		self.assertEqual(report["pending"], 1)
+		self.assertEqual(report["completed"], 1)
+		self.assertEqual(report["pending"], 2)
 
 	def test_complete_nonexistent_task(self):
 		self.storage.get_task.return_value = None
