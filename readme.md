@@ -76,3 +76,20 @@ python -m unittest discover tests
     - `from_dict` is a class method that reconstructs a Task object from a dictionary. 
 
    This addition improves data persistence and serialization, making it easier to store tasks in files and reload them during application startup.
+
+### Additional Functionalities
+Upon reviewing the system, I identified and added several essential functionalities:
+    
+- **Add Task:** Tasks are now case-insensitive, meaning '**Task 1**', '**task 1**', and '**TASK 1**' are considered the same. A task with the same name cannot be added if it is pending, but it can be added if the existing task is completed.
+
+- **Update Task:** Only the task description can be updated. The task title remains unique and unchangeable.
+
+- **Delete Task:** Tasks can be deleted based on their title.
+
+- **Clear Task List:** Allows for the complete removal of all tasks, providing a fresh start.
+
+- **List Only Completed Tasks:** Provides an option to filter by using flag(`--completed`) and list only the completed tasks.
+
+- **Search Task and Show Details:** Enables searching for a task by its title and displays its details.
+
+ - **Format Average Completion Time:** Converts the average completion time into a more readable format, enhancing usability over the default datetime format.
