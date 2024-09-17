@@ -52,7 +52,6 @@ class TaskManager:
 			return True
 		return False
 
-
 	def complete_task(self, title):
 		task = self.storage.get_task(title)
 		if task:
@@ -68,6 +67,10 @@ class TaskManager:
 			self.storage.remove_task(task)
 			return True
 		return False
+
+	def delete_all_tasks(self):
+		tasks = self.storage.get_all_tasks()
+		return self.storage.clear_all_tasks(tasks)
 
 	def list_tasks(self, include_completed=False, only_completed=False):
 		tasks = self.storage.get_all_tasks()

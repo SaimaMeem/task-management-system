@@ -26,6 +26,12 @@ def handle_delete(manager, title):
     else:
         print(f"Task '{title}' not found.")
 
+def handle_clear(manager):
+    if manager.delete_all_tasks():
+        print("The task list cleared successfully.")
+    else:
+        print("No tasks available.")
+
 def handle_list(manager, include_completed, only_completed):
     tasks = manager.list_tasks(include_completed=include_completed, only_completed=only_completed)
     sorted_tasks = sorted(tasks, key=lambda t: t.created_at, reverse=True)
@@ -72,6 +78,9 @@ def main():
     delete_parser = subparsers.add_parser("delete", help="Delete a pending task")
     delete_parser.add_argument("title", help="Task title")
 
+    # Clear task list
+    subparsers.add_parser("clear", help="Clear task list")
+
     # List tasks
     list_parser = subparsers.add_parser("list", help="List all pending tasks")
     list_parser.add_argument("--all", action="store_true", help="Include completed tasks")
@@ -91,6 +100,7 @@ def main():
         "update": lambda: handle_update(manager, args.title, args.description),
         "complete": lambda: handle_complete(manager, args.title),
         "delete": lambda: handle_delete(manager, args.title),
+        "clear": lambda: handle_clear(manager),
         "list": lambda: handle_list(manager, args.all, args.completed),
         "search": lambda: handle_search(manager, args.title),
         "report": lambda: handle_report(manager)
