@@ -111,6 +111,16 @@ class TestTaskManager(unittest.TestCase):
 		self.assertIn(tasks[1], result)
 		self.assertIn(tasks[2], result)
 
+	def test_search_task(self):
+		now = datetime(2024, 9, 17, 12, 0, 0)
+		task = Task("Task to Search", "Description")
+		task.created_at = now.isoformat()
+		self.storage.get_task.return_value = task
+
+		result, formatted_time = self.manager.search_task("Task to Search")
+		self.assertEqual(task, result)
+		self.assertEqual(formatted_time, "September 17, 2024 at 12:00 PM")
+
 	def test_generate_report(self):
 		now = datetime(2024, 9, 17, 12, 0, 0)
 		tasks = [
