@@ -77,6 +77,13 @@ class TestTaskManager(unittest.TestCase):
 		self.assertTrue(result)
 		self.storage.remove_task.assert_called_once_with(task)
 
+	def test_delete_nonexistent_task(self):
+		self.storage.get_task.return_value = None
+
+		result = self.manager.delete_task("Non-existent Task")
+		self.assertFalse(result)
+		self.storage.remove_task.assert_not_called()
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
