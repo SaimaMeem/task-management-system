@@ -35,6 +35,15 @@ class TestTaskManager(unittest.TestCase):
 		self.assertIsNotNone(result)
 		self.storage.save_task.assert_called()
 
+	def test_edit_task(self):
+		task = Task("Task to Edit", "Old Description")
+		self.storage.get_task.return_value = task
+
+		result = self.manager.edit_task("Task to Edit", "New Description")
+		self.assertTrue(result)
+		self.assertEqual(task.description, "New Description")
+		self.storage.update_task.assert_called_once_with(task)
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
