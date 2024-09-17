@@ -50,9 +50,9 @@ class Storage:
 	def get_all_tasks(self):
 		return list(self.tasks)
 
-	def clear_all_tasks(self, tasks):
-		if tasks:
-			tasks.clear()
+	def clear_all_tasks(self):
+		if self.tasks:
+			self.tasks = []
 			self.save_task_to_file()
 			return True
 		return False

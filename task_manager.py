@@ -69,8 +69,7 @@ class TaskManager:
 		return False
 
 	def delete_all_tasks(self):
-		tasks = self.storage.get_all_tasks()
-		return self.storage.clear_all_tasks(tasks)
+		return self.storage.clear_all_tasks()
 
 	def list_tasks(self, include_completed=False, only_completed=False):
 		tasks = self.storage.get_all_tasks()
