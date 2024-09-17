@@ -142,5 +142,18 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(report["completed"], 1)
 		self.assertEqual(report["pending"], 2)
 
+	def test_generate_report_with_no_completed_tasks(self):
+		tasks = [
+			Task("Task 1", "Description 1"),
+			Task("Task 2", "Description 2"),
+			Task("Task 3", "Description 3")
+		]
+		self.storage.get_all_tasks.return_value = tasks
+		report = self.manager.generate_report()
+		self.assertEqual(report["total"], 3)
+		self.assertEqual(report["completed"], 0)
+		self.assertEqual(report["pending"], 3)
+		self.assertNotIn("average_completion_time", report)
+
 if __name__ == "__main__":
 	unittest.main()
