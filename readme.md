@@ -55,7 +55,7 @@ python -m unittest discover tests
 **Ensure and validate with tests that the app meets the required functionality** and addresses any bugs. Enhance performance and do optimisations to the best of your knowledge, while refactoring the code for better readability and maintainability. Feel free to make necessary assumptions where applicable.
 
 
-## Thoughts, Justification, and Explanation of Solutions
+## Explanation of Solutions
 ### Required Missing Functionalities
  - **Data Persistence Across Sessions:** To ensure that user data remains intact and accessible across sessions, I have implemented a data persistence mechanism using a JSON file. This approach allows the application to store tasks and their details in a structured format, making it possible to add, edit, and delete tasks while preserving all information between sessions.
 
