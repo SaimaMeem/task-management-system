@@ -84,6 +84,18 @@ class TestTaskManager(unittest.TestCase):
 		self.assertFalse(result)
 		self.storage.remove_task.assert_not_called()
 
+	def test_clear_all_tasks(self):
+		tasks = [
+			Task("Task 1", "Description 1"),
+			Task("Task 2", "Description 2"),
+			Task("Task 3", "Description 3")
+		]
+		self.storage.get_all_tasks.return_value = tasks
+
+		result = self.manager.delete_all_tasks()
+		self.storage.clear_all_tasks.assert_called_once_with(tasks)
+		self.assertEqual(result, self.storage.clear_all_tasks.return_value)
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
