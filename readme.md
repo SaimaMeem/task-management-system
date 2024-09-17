@@ -104,3 +104,29 @@ To enhance the task management system’s functionality, security, and reporting
   - **Due Date Feature:** Add an option to specify a due date for tasks. This feature will allow the system to track and report tasks based on their due dates, identifying overdue tasks and improving task management.
 
   - **In-Progress Status:** Introduce an "**In Progress**" status for tasks. This addition will provide better task separation and enable more detailed reporting on tasks that are currently underway.
+
+
+### CLI Commands for Additional Functionalities
+- **Update Task:**
+
+        poetry run python main.py update "Buy groceries" "Milk, eggs, butter, and bread"
+
+- **Delete Task:**
+
+        poetry run python main.py delete "Pay Internet Bill"
+
+- **Clear Task List:**
+
+        poetry run python main.py clear
+
+- **List Only Completed Tasks:**
+
+        poetry run python main.py list --completed
+
+- **Search Task and Show Details:**
+
+        poetry run python main.py search "Buy groceries"
+
+
+
+ 
