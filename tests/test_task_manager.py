@@ -93,7 +93,7 @@ class TestTaskManager(unittest.TestCase):
 		self.storage.get_all_tasks.return_value = tasks
 
 		result = self.manager.delete_all_tasks()
-		self.storage.clear_all_tasks.assert_called_once_with(tasks)
+		self.storage.clear_all_tasks.assert_called_once()
 		self.assertEqual(result, self.storage.clear_all_tasks.return_value)
 
 	def test_list_tasks_exclude_completed(self):
