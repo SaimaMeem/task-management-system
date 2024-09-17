@@ -97,6 +97,20 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(len(result), 2)
 		self.assertNotIn(tasks[1], result)
 
+	def test_list_tasks_only_completed(self):
+		tasks = [
+			Task("Task 1", "Description 1"),
+			Task("Task 2", "Description 2"),
+			Task("Task 3", "Description 3")
+		]
+		tasks[1].completed = True
+		tasks[2].completed = True
+		self.storage.get_all_tasks.return_value = tasks
+		result = self.manager.list_tasks(only_completed=True)
+		self.assertEqual(len(result), 2)
+		self.assertIn(tasks[1], result)
+		self.assertIn(tasks[2], result)
+
 	def test_generate_report(self):
 		now = datetime(2024, 9, 17, 12, 0, 0)
 		tasks = [
