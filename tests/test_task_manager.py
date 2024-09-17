@@ -50,6 +50,17 @@ class TestTaskManager(unittest.TestCase):
 		self.assertFalse(result)
 		self.storage.update_task.assert_not_called()
 
+	def test_complete_task(self):
+		task = Task("Task to Complete", "Description")
+		self.storage.get_task.return_value = task
+
+		result = self.manager.complete_task("Task to Complete")
+		self.assertTrue(result)
+		self.assertTrue(task.completed)
+		self.assertIsNotNone(task.completed_at)
+		self.storage.update_task.assert_called_once_with(task)
+
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
