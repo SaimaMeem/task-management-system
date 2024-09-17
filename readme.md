@@ -127,6 +127,19 @@ To enhance the task management system’s functionality, security, and reporting
 
         poetry run python main.py search "Buy groceries"
 
-
-
- 
+### Test Cases for Additional Functionalities
+I have added some new test cases to ensure the new functionalities work as intended and to enhance overall system reliability. These tests cover:
+- Test Add Task When Existing Task Not Completed
+- Test Add Task When Existing Task Completed
+- Test Edit Task
+- Test Edit Nonexistent Task
+- Test Complete Task
+- Test Delete Task
+- Test Delete Nonexistent Task
+- Test Clear All Tasks
+- Test List Tasks Only Completed
+- Test Search Task
+- Test Search Nonexistent Task
+- Test Generate Report With No Completed Tasks
+- Test Generate Report With All Completed Tasks
+- Test Format Average Completion Time
