@@ -12,10 +12,10 @@ class TestTaskManager(unittest.TestCase):
 		self.manager = TaskManager(self.storage)
 
 	def test_add_task(self):
-		task = self.manager.add_task("Test Task", "Description")
-		self.storage.save_task.assert_called_once()
-		self.assertEqual(task.title, "Test Task")
-		self.assertEqual(task.description, "Description")
+		task1 = self.manager.add_task("Test Task", "Description")
+		self.storage.save_task.assert_called_once_with(task1)
+		self.assertEqual(task1.title, "Test Task")
+		self.assertEqual(task1.description, "Description")
 
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
