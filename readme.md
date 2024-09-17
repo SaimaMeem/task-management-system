@@ -67,3 +67,12 @@ python -m unittest discover tests
    - **Issue:** There was a bug in the `list_tasks` method where specifying the flag to list only pending tasks would still include completed tasks. This issue occurred because the `include_completed` parameter was not properly utilized to filter tasks based on their completion status.
 
    - **Fix:** I corrected this by using the `include_completed` parameter to handle the filtering of tasks. Now, the method correctly distinguishes between showing all tasks, or only pending tasks based on the provided flags.
+
+### Refactoring
+- The `main` class has been refactored to organize task management operations into individual functions (`handle_add`, `handle_update`, etc.) to improve modularity. It uses `argparse` to handle command-line arguments and maps them to specific handler functions via a dictionary. This approach simplifies command execution, enhances readability, and separates concerns, making the code easier to maintain and extend.
+
+-  The `Task` class now includes `to_dict` and `from_dict` methods. These methods enable easier conversion between `Task` objects and dictionaries, facilitating storage and retrieval in a structured format like JSON.
+    - `to_dict` converts the task's attributes into a dictionary.
+    - `from_dict` is a class method that reconstructs a Task object from a dictionary. 
+
+   This addition improves data persistence and serialization, making it easier to store tasks in files and reload them during application startup.
