@@ -12,10 +12,11 @@ class TestTaskManager(unittest.TestCase):
 		self.manager = TaskManager(self.storage)
 
 	def test_add_task(self):
-		task1 = self.manager.add_task("Test Task", "Description")
-		self.storage.save_task.assert_called_once_with(task1)
-		self.assertEqual(task1.title, "Test Task")
-		self.assertEqual(task1.description, "Description")
+		task = self.manager.add_task("Test Task", "Description")
+
+		self.storage.save_task.assert_called_once_with(task)
+		self.assertEqual(task.title, "Test Task")
+		self.assertEqual(task.description, "Description")
 
 	def test_add_task_when_existing_task_not_completed(self):
 		existing_task = Task("Existing Task", "Existing Description")
@@ -46,6 +47,7 @@ class TestTaskManager(unittest.TestCase):
 
 	def test_edit_nonexistent_task(self):
 		self.storage.get_task.return_value = None
+
 		result = self.manager.edit_task("Task to Edit", "New Description")
 		self.assertFalse(result)
 		self.storage.update_task.assert_not_called()
@@ -69,6 +71,7 @@ class TestTaskManager(unittest.TestCase):
 		]
 		tasks[1].completed = True
 		self.storage.get_all_tasks.return_value = tasks
+
 		result = self.manager.list_tasks()
 		self.assertEqual(len(result), 2)
 		self.assertNotIn(tasks[1], result)
@@ -83,6 +86,7 @@ class TestTaskManager(unittest.TestCase):
 		tasks[0].completed = True
 		tasks[0].completed_at = now.isoformat()
 		self.storage.get_all_tasks.return_value = tasks
+
 		report = self.manager.generate_report()
 		self.assertEqual(report["total"], 3)
 		self.assertEqual(report["completed"], 1)
@@ -90,6 +94,7 @@ class TestTaskManager(unittest.TestCase):
 
 	def test_complete_nonexistent_task(self):
 		self.storage.get_task.return_value = None
+
 		result = self.manager.complete_task("Non-existent Task")
 		self.assertFalse(result)
 
