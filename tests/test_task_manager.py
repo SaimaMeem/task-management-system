@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest.mock import MagicMock
 
 from task_manager import Task, TaskManager
@@ -174,7 +174,12 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(report["completed"], 3)
 		self.assertEqual(report["pending"], 0)
 		self.assertIn("average_completion_time", report)
-		self.assertEqual(report["average_completion_time"], '120m 0s')
+		self.assertEqual(report["average_completion_time"], "120m 0s")
+
+	def test_format_average_completion_time(self):
+		average_time = timedelta(minutes=30, seconds=30)
+		formatted_time = self.manager.format_average_completion_time(average_time)
+		self.assertEqual(formatted_time, "30m 30s")
 
 if __name__ == "__main__":
 	unittest.main()
