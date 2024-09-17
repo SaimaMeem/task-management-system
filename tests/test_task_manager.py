@@ -25,6 +25,16 @@ class TestTaskManager(unittest.TestCase):
 		self.assertIsNone(result)
 		self.storage.save_task.assert_not_called()
 
+
+	def test_add_task_when_existing_task_completed(self):
+		existing_task = Task("Existing Task", "Existing Description")
+		existing_task.completed = True
+		self.storage.get_task.return_value = existing_task
+
+		result = self.manager.add_task("Existing Task", "New Description")
+		self.assertIsNotNone(result)
+		self.storage.save_task.assert_called()
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
