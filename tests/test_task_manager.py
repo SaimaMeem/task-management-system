@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime
 from unittest.mock import MagicMock
 
 from task_manager import Task, TaskManager
@@ -30,12 +30,14 @@ class TestTaskManager(unittest.TestCase):
 		self.assertNotIn(tasks[1], result)
 
 	def test_generate_report(self):
+		now = datetime(2024, 9, 17, 12, 0, 0)
 		tasks = [
 		    Task("Task 1", "Description 1"),
 		    Task("Task 2", "Description 2"),
 		    Task("Task 3", "Description 3")
 		]
 		tasks[0].completed = True
+		tasks[0].completed_at = now.isoformat()
 		self.storage.get_all_tasks.return_value = tasks
 		report = self.manager.generate_report()
 		self.assertEqual(report["total"], 3)
