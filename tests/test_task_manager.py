@@ -62,6 +62,12 @@ class TestTaskManager(unittest.TestCase):
 		self.assertIsNotNone(task.completed_at)
 		self.storage.update_task.assert_called_once_with(task)
 
+	def test_complete_nonexistent_task(self):
+		self.storage.get_task.return_value = None
+
+		result = self.manager.complete_task("Non-existent Task")
+		self.assertFalse(result)
+		self.storage.complete_task.assert_not_called()
 
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
@@ -91,13 +97,6 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(report["total"], 3)
 		self.assertEqual(report["completed"], 1)
 		self.assertEqual(report["pending"], 2)
-
-	def test_complete_nonexistent_task(self):
-		self.storage.get_task.return_value = None
-
-		result = self.manager.complete_task("Non-existent Task")
-		self.assertFalse(result)
-
 
 if __name__ == "__main__":
 	unittest.main()
