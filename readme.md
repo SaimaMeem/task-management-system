@@ -93,3 +93,14 @@ Upon reviewing the system, I identified and added several essential functionalit
 - **Search Task and Show Details:** Enables searching for a task by its title and displays its details.
 
  - **Format Average Completion Time:** Converts the average completion time into a more readable format, enhancing usability over the default datetime format.
+
+
+### Proposed Improvements
+
+To enhance the task management system’s functionality, security, and reporting capabilities, the following improvements are recommended:
+
+ - **Unique Task ID:** Introduce a unique identifier for each task. This change ensures that tasks are distinguished by an ID rather than titles, which may be duplicated.
+
+  - **Due Date Feature:** Add an option to specify a due date for tasks. This feature will allow the system to track and report tasks based on their due dates, identifying overdue tasks and improving task management.
+
+  - **In-Progress Status:** Introduce an "**In Progress**" status for tasks. This addition will provide better task separation and enable more detailed reporting on tasks that are currently underway.
