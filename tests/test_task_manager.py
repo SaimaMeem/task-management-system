@@ -44,6 +44,12 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(task.description, "New Description")
 		self.storage.update_task.assert_called_once_with(task)
 
+	def test_edit_nonexistent_task(self):
+		self.storage.get_task.return_value = None
+		result = self.manager.edit_task("Task to Edit", "New Description")
+		self.assertFalse(result)
+		self.storage.update_task.assert_not_called()
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
