@@ -17,6 +17,14 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(task1.title, "Test Task")
 		self.assertEqual(task1.description, "Description")
 
+	def test_add_task_when_existing_task_not_completed(self):
+		existing_task = Task("Existing Task", "Existing Description")
+		self.storage.get_task.return_value = existing_task
+
+		result = self.manager.add_task("Existing Task", "New Description")
+		self.assertIsNone(result)
+		self.storage.save_task.assert_not_called()
+
 	def test_list_tasks_exclude_completed(self):
 		tasks = [
 		    Task("Task 1", "Description 1"),
