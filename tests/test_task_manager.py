@@ -121,6 +121,11 @@ class TestTaskManager(unittest.TestCase):
 		self.assertEqual(task, result)
 		self.assertEqual(formatted_time, "September 17, 2024 at 12:00 PM")
 
+	def test_search_nonexistent_task(self):
+		self.storage.get_task.return_value = None
+		result = self.manager.search_task("Non-existent Task")
+		self.assertIsNone(result)
+
 	def test_generate_report(self):
 		now = datetime(2024, 9, 17, 12, 0, 0)
 		tasks = [
